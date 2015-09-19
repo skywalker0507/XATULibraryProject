@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:stretchColumns="2">
+    <TableRow>
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:textSize="20sp"
+            android:text="星期一至星期四"/>
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:textSize="20sp"
+            android:text="08：00-22：00"/>
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:textSize="20sp"
+            android:layout_marginLeft="15dp"
+            android:layout_centerInParent="true"
+            android:text="星期五"/>
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:textSize="20sp"
+            android:text="08：00-11：30"/>
+    </TableRow>
+
+
+
+</TableLayout>

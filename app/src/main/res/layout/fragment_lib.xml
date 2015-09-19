@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/lib_listview"/>
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/add_menu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingRight="20dp"
+        android:paddingBottom="20dp"
+        android:paddingLeft="10dp"
+        fab:menu_labels_ellipsize="end"
+        fab:menu_labels_singleLine="true"
+        fab:menu_backgroundColor="#ccffffff">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/library_scan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_material_camera_dark"
+            fab:fab_size="mini"
+            fab:fab_colorNormal="#F5F5F5"
+            fab:fab_label="扫描条码添加" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/library_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_search_white_24dp"
+            fab:fab_colorNormal="#F5F5F5"
+            fab:fab_size="mini"
+            fab:fab_label="手动添加图书" />
+
+
+
+    </com.github.clans.fab.FloatingActionMenu>
+</RelativeLayout>

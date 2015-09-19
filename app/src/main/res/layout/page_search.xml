@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+  <!-- <TextView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:text="馆藏书目检索"
+       android:textColor="#2196F3"
+       android:gravity="center"
+       android:textSize="30sp"/>-->
+
+    <SearchView
+        android:id="@+id/searchKeyword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:descendantFocusability="afterDescendants"
+        android:iconifiedByDefault="false"
+        android:queryHint="请输入关键词"
+        android:layout_marginTop="20dp" />
+
+  <!--  <com.rey.material.widget.Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:spn_label="检索类型"
+        android:padding="8dp"
+        android:id="@+id/SearchType"
+        android:layout_below="@+id/searchKeyword"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="40dp"
+        android:layout_alignParentStart="true" />-->
+
+        <RadioGroup
+            android:id="@+id/radiogroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:orientation="horizontal">
+        <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="书名"
+        android:checked="true"
+        android:id="@+id/rd_bookname"/>
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="关键词"
+                android:id="@+id/rd_any"
+                />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="作者"
+            android:id="@+id/rd_author"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="ISBN号"
+            android:id="@+id/rd_ISBN"/>
+
+        </RadioGroup>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:visibility="invisible"
+        android:id="@+id/layout1">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_height="wrap_content"
+            android:text=" 搜索："/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_keywords"
+            android:text="书名，作者，ISBN号"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="共找到"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_count"
+            android:layout_marginLeft="10dp"
+            android:text="0"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="条结果"/>
+    </LinearLayout>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:fastScrollEnabled="true"
+        android:scrollbarStyle="insideInset"
+        android:id="@+id/listview_search"/>
+
+</LinearLayout>

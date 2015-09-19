@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">XATUlibrary</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+
+      <string name="cheese_ipsum">Jarlsberg lancashire edam. Dolcelatte hard cheese brie st. agur blue
+    cheese caerphilly bavarian bergkase cheese and biscuits mascarpone. Cheeseburger swiss bavarian
+    bergkase cream cheese fromage frais cheesy feet port-salut airedale. St. agur blue cheese rubber
+    cheese caerphilly cheddar cheesecake cream cheese manchego lancashire. Roquefort squirty cheese
+    the big cheese.</string>
+    <string name="checkin">Checkin</string>
+    <string name="menu_settings">Settings</string>
+    <string name="reader1">1.借书证不得互借，违者扣证两周，并对双方各处以2～50元罚款。</string>
+    <string name="reader2">2.借期含借日、还日及节假日；到期不还，每册每天罚款0.1元，超过30天以上，从第31天起，每册每天收违约金0.2元；
+        寒暑假到期的书可延长至开学第1周内归还，否则超期时间将把寒暑假计算在内。</string>
+    <string name="reader3">3.对伪造、涂改借书证者，除没收借书证、处以每证50元罚款外，还将追究其责任。</string>
+    <string name="reader4">4.对遗失借书证者，补证后原证又找到，应及时向有关部门注销；发现多证使用者，将处以每证最低5元的罚款。</string>
+    <string name="reader5">5.凡读者遗失、污损所借书刊，一般应赔偿相同版本之书刊，并补交手续费；若无法赔偿原书，将处以5～10倍的罚款。</string>
+    <string name="reader6">6.凡未办理借阅手续，将书刊资料带出室外或库外者，一律以偷窃论处。责任者需做出书面检查，由所在单位签署意见后，
+        送交图书馆有关部门图书馆将处以100～500元罚款，并通知所在单位领导，上报学校有关部门。</string>
+    <string name="reader7">7.阅览室的书刊资料不得外借，若确因复印需要，可办理相关手续后在馆内复印，闭馆前归还
+        。闭馆前未归还，每过期一个单元时间，每册罚款1元。</string>
+    <string name="reader8">8.读者进入图书馆禁止吸烟，违反者处以200元罚款，情节严重者交校保卫处．</string>
+
+
+</resources>

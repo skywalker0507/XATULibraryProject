@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardCornerRadius="6dp"
+    card_view:cardElevation="4dp"
+    card_view:cardUseCompatPadding="true"
+    card_view:contentPadding="10dp">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:descendantFocusability="blocksDescendants"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_bookname"
+        android:text="书名"
+        android:textColor="#000"
+        android:textSize="20sp"
+        android:gravity="center"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="作者"
+        android:id="@+id/tv_author"
+
+        android:layout_below="@+id/tv_bookname" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:orientation="horizontal">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="5dp"
+            android:text="借阅时间"
+            android:gravity="center"
+            android:id="@+id/tv_begintime"
+            />
+        <TextView
+            android:layout_width="140dp"
+            android:layout_height="40dp"
+            android:id="@+id/begintime"
+            android:gravity="center"
+            android:text="2015-7-23"
+            android:layout_toRightOf="@+id/tv_begintime"
+            android:layout_toEndOf="@+id/tv_begintime"
+            />
+
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="5dp"
+            android:text="应还时间"
+            android:gravity="center"
+            android:id="@+id/tv_endtime"
+            android:layout_below="@+id/tv_begintime" />
+        <TextView
+            android:layout_width="140dp"
+            android:layout_height="40dp"
+            android:text="2015-01-01"
+            android:id="@+id/endtime"
+            android:gravity="center"
+            android:layout_below="@+id/begintime"
+            android:layout_toRightOf="@+id/tv_endtime"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:id="@+id/borrowAgain"
+            android:text="续借"
+            android:layout_below="@+id/endtime"
+            android:layout_toRightOf="@+id/borrowtimes"
+            android:layout_toEndOf="@+id/borrowtimes" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="续借次数"
+            android:gravity="center"
+            android:layout_below="@+id/tv_endtime"
+            android:layout_alignLeft="@+id/tv_endtime"
+            android:layout_alignStart="@+id/tv_endtime"
+            android:id="@+id/textView2" />
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:id="@+id/borrowtimes"
+            android:layout_below="@+id/tv_endtime"
+            android:layout_toRightOf="@+id/textView2"
+            android:layout_toEndOf="@+id/textView2" />
+
+    </RelativeLayout>
+        <com.txusballesteros.widgets.FitChart
+            android:id="@+id/fitChart"
+            android:layout_width="113dp"
+            android:layout_height="107dp"
+            android:layout_marginTop="10dp"
+            app:valueStrokeColor="#ff0000"
+            app:backStrokeColor="#00ff00" />
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
+
+</android.support.v7.widget.CardView>
