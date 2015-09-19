@@ -52,8 +52,8 @@ public class AddbookAdapter extends BaseAdapter {
             convertView= LayoutInflater.from(context).inflate(R.layout.addbook,parent,false);
             holder=new MyViewHolder();
             holder.cover=(ImageView)convertView.findViewById(R.id.addbook_cover);
-            holder.name=(TextView)convertView.findViewById(R.id.add_name);
-            holder.author=(TextView)convertView.findViewById(R.id.add_author);
+            holder.name=(TextView)convertView.findViewById(R.id.addbook_name);
+            holder.author=(TextView)convertView.findViewById(R.id.addbook_author);
             convertView.setTag(holder);
         }else {
             holder=(MyViewHolder)convertView.getTag();
