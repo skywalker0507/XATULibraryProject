@@ -163,6 +163,7 @@ public class LibraryFragment extends Fragment {
         }
         Intent intent=new Intent(getActivity(), DetailInfoActivity.class);
         intent.putExtra("add_isbn",result.getContents());
+        intent.putExtra("type","scan");
         startActivity(intent);
         Log.e("OUTPUT", result.getContents());
     }

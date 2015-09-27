@@ -67,30 +67,29 @@ public class DetailInfoActivity extends BaseActivity {
 
         handler = new MyHandler();
         getDetailInfo = new GetDetailInfo(DetailInfoActivity.this);
-        String ISBN=intent.getStringExtra("add_isbn");
-        if (!ISBN.isEmpty()){
+        String type=intent.getStringExtra("type");
+        if (type.equals("scan")){
+            String ISBN=intent.getStringExtra("add_isbn");
             getDetailInfo.getAllInfo(ISBN,handler,10);
-        }else {
+        }else if (type.equals("normal")){
             book = (Book) intent.getSerializableExtra("book_message");
+            Log.e("detail",book.getBookname());
             util = new AddToLruCacheUtil();
             String url= UserData.getUrl();
             String doubanUrl=util.getUrlCache(url);
-            if (doubanUrl!=null){
-
-            }
             getDetailInfo.GetDoubanUrl(url, handler);
         }
     }
 
 
-    private void getIntentText() {
+  /*  private void getIntentText() {
         Intent intent = getIntent();
         String ISBN=intent.getStringExtra("add_isbn");
         if (ISBN.isEmpty()){
 
         }
         book = (Book) intent.getSerializableExtra("book_message");
-    }
+    }*/
 
     @Override
     protected void findView() {

@@ -231,9 +231,13 @@ public class UserLoginActivity extends AppCompatActivity {
         if (isremember) {
             String myacount = UserData.getUserName();
             String mypassword = UserData.getPassWord();
+            Log.e("Account",myacount+"--"+mypassword);
             try {
                 studentID.setText(AESEncryptor.decrypt("qwerty",myacount)); //"qwerty为脏数据
-                password.setText(AESEncryptor.decrypt("poiuyt",mypassword));
+
+                password.setText(AESEncryptor.decrypt("poiuyt", mypassword).toString());
+                Log.e("Acount",AESEncryptor.decrypt("qwerty",myacount)+"=="
+                        +AESEncryptor.decrypt("poiuyt", mypassword).toString());
             }catch (Exception e){
                 e.printStackTrace();
             }
@@ -254,7 +258,7 @@ public class UserLoginActivity extends AppCompatActivity {
             UserData.setRememberPassword(true);
             try {
                 UserData.setUserName(AESEncryptor.encrypt("qwerty", studentID.getText().toString()));
-                UserData.setPassWord(AESEncryptor.encrypt("poiuyt",password.getText().toString()));
+                UserData.setPassWord(AESEncryptor.encrypt("poiuyt", password.getText().toString()));
             }catch (Exception e){
                e.printStackTrace();
             }

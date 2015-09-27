@@ -273,8 +273,8 @@ public class GetDetailInfo {
             ContentValues values = new ContentValues();
             String title = object.getString("title");
             book.setBookname(title);
-//            String author = object.getString("author");
-            String author=DataSupport.where("isbn_number = ?",ISBN).find(DoubanBook.class).get(0).getAuthor();
+            String author = object.getString("author");
+//            String author=DataSupport.where("isbn_number = ?",ISBN).find(DoubanBook.class).get(0).getAuthor();
             book.setAuthor(author);
             String pages = object.getString("pages");
             values.put("allpages",pages);

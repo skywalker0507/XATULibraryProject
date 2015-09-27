@@ -4,7 +4,7 @@ android {
     buildToolsVersion '23.0.0'
     defaultConfig {
         applicationId "com.liuqiang.xatulibrary"
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -39,7 +39,7 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:1.3.0'
     compile 'com.android.support:design:23.0.1'
     compile 'com.squareup:android-times-square:1.6.4@aar'
-//zxing library
+    //zxing library
     compile 'com.google.zxing:core:3.0.1'
     compile 'com.journeyapps:zxing-android-embedded:3.0.1@aar'
     compile files('libs/jsoup-1.8.2.jar')

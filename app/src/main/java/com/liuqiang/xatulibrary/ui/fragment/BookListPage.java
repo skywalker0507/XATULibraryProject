@@ -19,7 +19,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.liuqiang.xatulibrary.util.DBUtil;
 import com.liuqiang.xatulibrary.R;
 import com.liuqiang.xatulibrary.adapter.BookListAdapter;
 import com.liuqiang.xatulibrary.base.BaseFragment;
@@ -31,6 +30,7 @@ import com.liuqiang.xatulibrary.networking.GetBookListThread;
 import com.liuqiang.xatulibrary.networking.GetDetailInfo;
 import com.liuqiang.xatulibrary.networking.RenewManager;
 import com.liuqiang.xatulibrary.ui.activity.DetailInfoActivity;
+import com.liuqiang.xatulibrary.util.DBUtil;
 
 import org.litepal.AddToLruCacheUtil;
 
@@ -68,7 +68,6 @@ public class BookListPage extends BaseFragment {
 
     @Override
     public void findView(View view) {
-        listView = (ListView) view.findViewById(R.id.listview);
         noBook = (TextView) view.findViewById(R.id.tv_noBook);
     }
 
@@ -85,7 +84,6 @@ public class BookListPage extends BaseFragment {
         manager = new RenewManager();
         util = new AddToLruCacheUtil();
         dbUtil=new DBUtil();
-
         if (NetworkState.isNetworkAvailable(getActivity())){
             getDetailInfo = new GetDetailInfo(getActivity());
             GetBookListThread thread = new GetBookListThread(UserData.getUserCookie(), handler);
@@ -104,6 +102,7 @@ public class BookListPage extends BaseFragment {
         dialog.setTitle("正在加载数据");
         dialog.setMessage("正在加载数据,请稍后。。。");
         dialog.show();
+        listView = (ListView) view.findViewById(R.id.listview);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -112,6 +111,7 @@ public class BookListPage extends BaseFragment {
                 Intent intent = new Intent(getActivity(), DetailInfoActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("book_message", book);
+                intent.putExtra("type","normal");
                 intent.putExtras(bundle);
 
                 startActivity(intent);

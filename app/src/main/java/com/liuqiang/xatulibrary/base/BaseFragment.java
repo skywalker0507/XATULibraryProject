@@ -41,11 +41,6 @@ public abstract class BaseFragment extends Fragment{
         super.onResume();
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ((ViewGroup) mLayoutView.getParent()).removeView(mLayoutView);
-    }
 
     /**
      * 设置布局文件

@@ -154,9 +154,9 @@ public class SearchPage extends Fragment implements SearchView.OnQueryTextListen
                 final Book book = allList.get(i);
                 UserData.setUrl(book.getUrl());
                 Intent intent = new Intent(getActivity(), DetailInfoActivity.class);
-                intent.putExtra("flag", 2);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("book_message", book);
+                intent.putExtra("type","normal");
                 intent.putExtras(bundle);
 
                 startActivity(intent);

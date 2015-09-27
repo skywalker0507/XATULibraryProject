@@ -17,6 +17,7 @@ import com.liuqiang.xatulibrary.ui.fragment.MainFragment;
 import com.liuqiang.xatulibrary.ui.fragment.RecommendFragment;
 import com.liuqiang.xatulibrary.ui.fragment.Redr_lostFragment;
 import com.liuqiang.xatulibrary.ui.fragment.TipsFragment;
+import com.liuqiang.xatulibrary.util.AESEncryptor;
 
 import br.liveo.Model.HelpLiveo;
 import br.liveo.interfaces.OnItemClickListener;
@@ -38,7 +39,7 @@ public class MainActivity extends NavigationLiveo implements OnItemClickListener
 //        myApplication.clearList();
 //        books=(ArrayList<Book>)getIntent().getSerializableExtra("booklist");
         // User Information
-        this.userName.setText(UserData.getUserName());
+        this.userName.setText(AESEncryptor.decrypt("qwerty", UserData.getUserName()));
         this.userPhoto.setImageResource(R.drawable.ic_no_user);
         this.userBackground.setImageResource(R.drawable.ic_user_background_first);
 
