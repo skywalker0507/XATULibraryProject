@@ -2,6 +2,7 @@ package com.liuqiang.xatulibrary.adapter;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +50,7 @@ public class LibraryAdapter extends BaseAdapter {
             holder.imageView = (ImageView) v.findViewById(R.id.iv_icon);
             holder.seekBar = (SeekBar) v.findViewById(R.id.library_seekbar);
             holder.allpages = (TextView) v.findViewById(R.id.library_allpages);
-//            holder.freepages = (TextView) v.findViewById(R.id.library_freepages);
+            holder.freepages= (TextView) v.findViewById(R.id.library_freepages);
             v.setTag(holder);
         } else {
             v = view;
@@ -59,8 +60,12 @@ public class LibraryAdapter extends BaseAdapter {
         holder.name.setText(name);
         holder.author.setText(book.getAuthor());
         holder.imageView.setImageBitmap(book.getCover());
+        final int free=DataSupport.where("bookname = ?", name).find(DoubanBook.class).get(0).getFreePages();
+        holder.freepages.setText("已经读了" + free + "页");
+        Log.e("get freepages",""+ book.getFreePages() );
         holder.seekBar.setMax(book.getAllPages());
         holder.seekBar.setTag(i);
+        holder.seekBar.setProgress(free);
         holder.seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -69,10 +74,6 @@ public class LibraryAdapter extends BaseAdapter {
                     TextView freepages=(TextView)v.findViewById(R.id.library_freepages);
                     freepages.setText("已经读了"+progress+"页");
                 }
-                ContentValues values = new ContentValues();
-                values.put("freepages", progress);
-//                holder.freepages.setText("已经读了"+progress+"页");
-                DataSupport.updateAll(DoubanBook.class, values, "bookname = ?", name);
             }
 
             @Override
@@ -82,7 +83,10 @@ public class LibraryAdapter extends BaseAdapter {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
+                ContentValues values = new ContentValues();
+                values.put("freepages", seekBar.getProgress());
+                Log.e("progress",""+seekBar.getProgress());
+                DataSupport.updateAll(DoubanBook.class, values, "bookname = ?", name);
             }
         });
         holder.allpages.setText("全书共"+book.getAllPages()+"页");
@@ -107,7 +111,7 @@ public class LibraryAdapter extends BaseAdapter {
         SeekBar seekBar;
         int id;
         TextView allpages;
-//        TextView freepages;
+        TextView freepages;
 
     }
 

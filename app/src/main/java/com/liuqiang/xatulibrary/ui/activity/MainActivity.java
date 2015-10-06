@@ -50,7 +50,7 @@ public class MainActivity extends NavigationLiveo implements OnItemClickListener
         mHelpLiveo.add("我的图书馆", R.drawable.ic_drafts_black_24dp);
         mHelpLiveo.add("读者须知", R.drawable.ic_settings_black_24dp);
         mHelpLiveo.add("读者挂失", R.drawable.ic_star_black_24dp);
-        mHelpLiveo.add("读者荐购", R.drawable.ic_send_black_24dp);
+//        mHelpLiveo.add("读者荐购", R.drawable.ic_send_black_24dp);
         mHelpLiveo.addSeparator();
        /* mHelpLiveo.addSeparator(); // Item separator
         mHelpLiveo.add(getString(R.string.trash), R.mipmap.ic_delete_black_24dp);

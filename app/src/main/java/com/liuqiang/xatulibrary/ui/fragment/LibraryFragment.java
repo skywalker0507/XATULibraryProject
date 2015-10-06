@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.Toast;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
@@ -47,18 +46,17 @@ public class LibraryFragment extends Fragment {
     private int count;
     private MyHandler handler;
     private ProgressDialog dialog;
-    private int flag = 2;
+    private int flag = 1;
     private FloatingActionMenu menu;
     private FloatingActionButton scan;
     private FloatingActionButton add;
     private Handler mUiHandler = new Handler();
+    private List<DoubanBook> list=new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getDetailInfo = new GetDetailInfo(getActivity());
-        DoubanBook last= DataSupport.findLast(DoubanBook.class);
-        count=last.getId();
         Log.e("count", "" + count);
         handler = new MyHandler();
     }
@@ -72,15 +70,24 @@ public class LibraryFragment extends Fragment {
         dialog.setTitle("正在加载数据");
         dialog.setMessage("正在加载数据,请稍后。。。");
         dialog.show();
+//        adapter=new LibraryAdapter(getActivity(),books);
+//        listView.setAdapter(adapter);
         menu=(FloatingActionMenu)view.findViewById(R.id.add_menu);
         scan=(FloatingActionButton)view.findViewById(R.id.library_scan);
         add=(FloatingActionButton)view.findViewById(R.id.library_add);
-        if (count > 0) {
+/*        if (count > 0) {
 //            String isbn = dbManager.readBookInfo(1, "isbn");
             DoubanBook doubanBook=DataSupport.find(DoubanBook.class, 1);
             String isbn=doubanBook.getISBN_number();
             getDetailInfo.getAllInfo(isbn, handler,1);
 
+        }*/
+
+        list=DataSupport.findAll(DoubanBook.class);
+        count=list.size();
+        if (count>0){
+            String isbn=list.get(0).getISBN_number();
+            getDetailInfo.getAllInfo(isbn, handler,1);
         }
 
         menu.hideMenuButton(false);
@@ -106,7 +113,6 @@ public class LibraryFragment extends Fragment {
                 View view1=inflater1.inflate(R.layout.dialog_addbook, null);
                 SearchView searchView=(SearchView)view1.findViewById(R.id.add_search);
                 ListView searchlist=(ListView)view1.findViewById(R.id.add_listview);
-//                AddbookAdapter addbookAdapter=new AddbookAdapter();
                 searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                     @Override
                     public boolean onQueryTextSubmit(String query) {
@@ -139,12 +145,35 @@ public class LibraryFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(), "ok", Toast.LENGTH_SHORT).show();
-                Intent intent=new Intent(getActivity(),ReadingActivity.class);
-                intent.putExtra("ID", position + 1);
-                Log.e("id position", id + "--" + position);
-                MainActivity activity=(MainActivity)getActivity();
+                Intent intent = new Intent(getActivity(), ReadingActivity.class);
+                intent.putExtra("ISBN", books.get(position).getISBN_number());
+                MainActivity activity = (MainActivity) getActivity();
                 activity.startActivity(intent);
+            }
+        });
+
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position,final long id) {
+                AlertDialog dialog=new AlertDialog.Builder(getActivity())
+                        .setMessage("删除？")
+                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        })
+                        .setPositiveButton("删除", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                books.remove(position);
+                                DataSupport.delete(DoubanBook.class, id + 1);
+                                adapter.notifyDataSetChanged();
+                            }
+                        }).create();
+                dialog.show();
+
+                return true;
             }
         });
 
@@ -155,7 +184,6 @@ public class LibraryFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.e("hello world","helo");
         IntentResult result=IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if((result==null)||(result.getContents()==null))
         {
@@ -177,11 +205,10 @@ public class LibraryFragment extends Fragment {
                     DoubanBook book = (DoubanBook) msg.obj;
 //                    Log.e("name in count",book.getBookname());
                     books.add(book);
-                    if (flag <=count+1) {
-                        if (flag<=count){
+                    if (flag <=count) {
+                        if (flag<count){
                             Log.e("flag", "" + flag + "--" + count);
-//                            String isbn = dbManager.readBookInfo(flag, "isbn");
-                            DoubanBook doubanBook=DataSupport.find(DoubanBook.class, flag);
+                            DoubanBook doubanBook=list.get(flag);
                             String isbn=doubanBook.getISBN_number();
                             flag = flag + 1;
                             Log.e("isbn", isbn);

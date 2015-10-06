@@ -25,8 +25,7 @@ import com.liuqiang.xatulibrary.common.Book;
 import com.liuqiang.xatulibrary.common.DoubanBook;
 import com.liuqiang.xatulibrary.common.UserData;
 import com.liuqiang.xatulibrary.networking.GetDetailInfo;
-
-import org.litepal.AddToLruCacheUtil;
+import com.liuqiang.xatulibrary.util.DBUtil;
 
 /**
  * Created by liuqiang on 15-9-4.
@@ -36,7 +35,8 @@ public class DetailInfoActivity extends BaseActivity {
     private Handler mUiHandler = new Handler();
     private FloatingActionButton baidu;
     private FloatingActionButton douban;
-    private Book book;
+    private Book intentbook;
+    private DoubanBook book;
     //    private WebView webView;
     private String douban_url;
     private ImageView header;
@@ -47,11 +47,11 @@ public class DetailInfoActivity extends BaseActivity {
             detail_author, detail_publisher, detail_pubdate, detail_pages, detail_isbn, detail_price,
             detail_summary;
     private ProgressDialog progressDialog;
-    public AddToLruCacheUtil util;
+//    public AddToLruCacheUtil util;
     private CollapsingToolbarLayout collapsingToolbar;
     private android.support.design.widget.FloatingActionButton addtolib;
     private Toolbar toolbar;
-    private ImageView imageView;
+    private DBUtil dbUtil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +61,9 @@ public class DetailInfoActivity extends BaseActivity {
         progressDialog.setTitle("正在加载数据");
         progressDialog.setMessage("加载中，请稍后...");
         progressDialog.setCancelable(true);
-//        progressDialog.show();
+        progressDialog.show();
         initView();
+        dbUtil=new DBUtil();
         Intent intent = getIntent();
 
         handler = new MyHandler();
@@ -72,11 +73,9 @@ public class DetailInfoActivity extends BaseActivity {
             String ISBN=intent.getStringExtra("add_isbn");
             getDetailInfo.getAllInfo(ISBN,handler,10);
         }else if (type.equals("normal")){
-            book = (Book) intent.getSerializableExtra("book_message");
-            Log.e("detail",book.getBookname());
-            util = new AddToLruCacheUtil();
+            intentbook = (Book) intent.getSerializableExtra("book_message");
+            Log.e("detail",intentbook.getBookname());
             String url= UserData.getUrl();
-            String doubanUrl=util.getUrlCache(url);
             getDetailInfo.GetDoubanUrl(url, handler);
         }
     }
@@ -140,7 +139,7 @@ public class DetailInfoActivity extends BaseActivity {
         baidu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String key = book.getBookname();
+                String key = intentbook.getBookname();
                 Log.e("------>>>>>>>", key);
                 String url = "http://www.baidu.com.cn/s?wd=" + key + "&cl=3";
                 Intent intent = new Intent(DetailInfoActivity.this, SearchActivity.class);
@@ -169,7 +168,12 @@ public class DetailInfoActivity extends BaseActivity {
                         .setPositiveButton("加入", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-//                                            book.save();
+                                if(dbUtil.checkISBNExists(book.getISBN_number())){
+                                    Toast.makeText(DetailInfoActivity.this,"该书已在我的图书馆中",Toast.LENGTH_SHORT).show();
+                                }else {
+                                    book.save();
+                                    Toast.makeText(DetailInfoActivity.this,"已加入我的图书馆",Toast.LENGTH_SHORT).show();
+                                }
                             }
                         })
                         .setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -197,13 +201,14 @@ public class DetailInfoActivity extends BaseActivity {
             switch (msg.what) {
                 case 1:
                     douban_url = (String) msg.obj;
+                    Log.e("douban ---url", douban_url);
                     String ISBN = douban_url.replace("http://book.douban.com/isbn/", "").replace("/", "");
                     getDetailInfo.getBookInfo(handler,ISBN);
                     Log.e("douban url", douban_url);
                     break;
                 case 2:
                 case 1000:
-                    final DoubanBook book = (DoubanBook) msg.obj;
+                    book = (DoubanBook) msg.obj;
                     detail_cover.setImageBitmap(book.getCover());
                     detail_author.setText(book.getAuthor());
                     detail_average.setText(book.getAverage());
@@ -220,6 +225,7 @@ public class DetailInfoActivity extends BaseActivity {
                         builder.append("  " + book.getTags().get(i));
                     }
                     detail_tags.setText(builder.toString());
+                    progressDialog.dismiss();
                     break;
                 case 10:
                     Toast.makeText(DetailInfoActivity.this, "未找到相关数据！", Toast.LENGTH_LONG).show();

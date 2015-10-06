@@ -1,23 +1,26 @@
 package com.liuqiang.xatulibrary.ui.fragment;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.CookieSyncManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.liuqiang.xatulibrary.R;
-import com.liuqiang.xatulibrary.base.BaseFragment;
 import com.liuqiang.xatulibrary.common.UserData;
 
 /**
  * Created by liuqiang on 15-7-20.
  */
-public class Redr_lostFragment extends BaseFragment {
+public class Redr_lostFragment extends Fragment {
     private WebView webView;
     private String URL = "http://222.25.12.227:8080/reader/redr_lost.php";
-/*
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,9 +56,9 @@ public class Redr_lostFragment extends BaseFragment {
 
         webView.loadUrl(URL);
         return rootview;
-    }*/
+    }
 
-    @Override
+   /* @Override
     public int onSetLayoutId() {
         return R.id.web_redr_lost;
     }
@@ -91,6 +94,6 @@ public class Redr_lostFragment extends BaseFragment {
         });
 
         webView.loadUrl(URL);
-    }
+    }*/
 
 }

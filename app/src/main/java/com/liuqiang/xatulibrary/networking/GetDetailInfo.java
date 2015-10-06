@@ -67,7 +67,7 @@ public class GetDetailInfo {
             public void run() {
                 String tmp=util.getUrlCache(library_url);
                     if (tmp!=null){
-                        url=tmp;
+                        url="http://book.douban.com/isbn/"+tmp;
                         Log.e("tmp",tmp);
                     }else {
 
@@ -85,7 +85,7 @@ public class GetDetailInfo {
                                 Document document = Jsoup.parse(s);
                                 url = document.select("div.left_content>ul").select("li").
                                         get(0).select("a").attr("href");
-                                Log.e("getDetailInfo", url);
+                                Log.e("getDetailInfo----->>>", url);
                                 util.addUrlCache(library_url,url);
                                 Log.e("get url", util.getUrlCache(library_url));
 //                                ISBN = url.replace("http://book.douban.com/isbn/", "").replace("/", "");
@@ -99,7 +99,7 @@ public class GetDetailInfo {
                 Message message = new Message();
                 message.what = 1;
                 message.obj = url;
-                Log.e("getDetailInfo", url);
+                Log.e("getDetailInfo finally", url);
                 handler.sendMessage(message);
             }
         });

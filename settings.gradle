@@ -1,2 +1,2 @@
-include ':app', ':test', ':litepallib'
+include ':app', ':litepallib'
 project(':litepallib').projectDir = new File('litepal')
