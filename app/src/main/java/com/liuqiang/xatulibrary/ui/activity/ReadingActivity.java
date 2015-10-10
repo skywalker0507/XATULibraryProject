@@ -102,7 +102,6 @@ public class ReadingActivity extends AppCompatActivity {
                     Times time = new Times();
                     time.setDate(d);
                     Log.e("dataeee", d);
-                    Toast.makeText(ReadingActivity.this, "hello world", Toast.LENGTH_SHORT).show();
                     if (!checkTimeExist(ISBN, d)) {
                         time.save();
                         book.getTimes().add(time);

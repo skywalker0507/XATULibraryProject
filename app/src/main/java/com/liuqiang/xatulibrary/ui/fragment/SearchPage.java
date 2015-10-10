@@ -1,5 +1,6 @@
 package com.liuqiang.xatulibrary.ui.fragment;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -61,6 +62,7 @@ public class SearchPage extends Fragment implements SearchView.OnQueryTextListen
     private int visibleItemCount; // 当前窗口可见项总数
 
     private String lastSearched = "";
+    private ProgressDialog dialog;
 
     private Handler handler = new Handler() {
         @Override
@@ -75,6 +77,7 @@ public class SearchPage extends Fragment implements SearchView.OnQueryTextListen
                     doAdd(list);
                     keyword.setText(searchView.getQuery());
                     linearLayout.setVisibility(View.VISIBLE);
+                    dialog.dismiss();
                     break;
                 case 2:
                     number = (String) msg.obj;
@@ -85,6 +88,7 @@ public class SearchPage extends Fragment implements SearchView.OnQueryTextListen
                     linearLayout.setVisibility(View.INVISIBLE);
                     Toast.makeText(getActivity(), "未搜到相关数据", Toast.LENGTH_SHORT).show();
                     listView.removeFooterView(loadMoreView);
+                    dialog.dismiss();
 
                 default:
                     break;
@@ -100,6 +104,7 @@ public class SearchPage extends Fragment implements SearchView.OnQueryTextListen
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        dialog=new ProgressDialog(getActivity());
     }
 
     @Nullable
@@ -178,6 +183,9 @@ public class SearchPage extends Fragment implements SearchView.OnQueryTextListen
 
     @Override
     public boolean onQueryTextSubmit(String query) {
+        dialog.setTitle("正在搜索数据");
+        dialog.setMessage("正在搜索数据,请稍后");
+        dialog.show();
         if (query != lastSearched) {
             allList.clear();
             counter = 1;
@@ -190,7 +198,7 @@ public class SearchPage extends Fragment implements SearchView.OnQueryTextListen
             Toast.makeText(getActivity(), "关键词过短", Toast.LENGTH_SHORT).show();
             return false;
         }
-      /* if (lastSearched.equals(query)) {
+     /*  if (lastSearched.equals(query)) {
             searchView.clearFocus();
             return false;
         }*/

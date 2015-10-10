@@ -152,7 +152,7 @@ public class BookListPage extends BaseFragment {
                     }else {
                         for (int i=0;i<books.size();i++){
                             Book book = books.get(i);
-                            if(!dbUtil.checkISBNExists(book.getBookname())){
+                            if(!dbUtil.checkISBNExists(book.getISBN_number())){
                                 getDetailInfo.GetISBN(book.getUrl());
                             }
                         }

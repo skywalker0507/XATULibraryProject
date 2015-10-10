@@ -19,7 +19,7 @@ public class DBUtil {
 
     public boolean checkNameExists(String name) {
         boolean result = false;
-        List<DoubanBook> libraries = DataSupport.where("name=?", name).find(DoubanBook.class);
+        List<DoubanBook> libraries = DataSupport.where("bookname=?", name).find(DoubanBook.class);
         if (libraries.size()>0) {
             result = true;
             Log.e("exist", "exist in library");
@@ -56,13 +56,17 @@ public class DBUtil {
 
     public boolean checkISBNExists(String isbn) {
         boolean result = false;
-        List<DoubanBook> libraries = DataSupport.where("isbn_number=?", isbn).find(DoubanBook.class);
-        if (libraries.size()>0) {
-            result = true;
-            Log.e("exist", "exist in library");
-        } else {
-            result = false;
-            Log.e("not exist","not exist in library");
+        if (isbn==null){
+
+        }else {
+            String ISBN = DataSupport.where("isbn_number=?", isbn).find(DoubanBook.class).get(0).getISBN_number();
+            if (ISBN==null) {
+                result = true;
+                Log.e("exist", "exist in library");
+            } else {
+                result = false;
+                Log.e("not exist","not exist in library");
+            }
         }
 
         return result;

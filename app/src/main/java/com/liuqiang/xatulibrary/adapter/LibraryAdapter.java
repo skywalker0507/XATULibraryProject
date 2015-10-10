@@ -27,6 +27,7 @@ public class LibraryAdapter extends BaseAdapter {
     private Context context;
     private List<DoubanBook> list = new ArrayList<>();
     MyViewHolder holder;
+    private static final String TAG="LibraryAdapter";
 
     public LibraryAdapter(Context context, List<DoubanBook> list) {
         this.context = context;
@@ -41,6 +42,7 @@ public class LibraryAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         final DoubanBook book = list.get(i);
+//        final int free=DataSupport.where("bookname =?", "Clojure编程").find(DoubanBook.class).get(0).getFreePages();
         View v;
         if (view == null) {
             holder = new MyViewHolder();
@@ -56,11 +58,13 @@ public class LibraryAdapter extends BaseAdapter {
             v = view;
             holder = (MyViewHolder) v.getTag();
         }
-        final String name = book.getBookname();
-        holder.name.setText(name);
+        final String ISBN = book.getISBN_number();
+        Log.e(TAG, ISBN);
+        holder.name.setText(book.getBookname());
         holder.author.setText(book.getAuthor());
         holder.imageView.setImageBitmap(book.getCover());
-        final int free=DataSupport.where("bookname = ?", name).find(DoubanBook.class).get(0).getFreePages();
+        final int free=DataSupport.where("isbn_number =?", ISBN).find(DoubanBook.class).get(0).getFreePages();
+//        final int free=5;
         holder.freepages.setText("已经读了" + free + "页");
         Log.e("get freepages",""+ book.getFreePages() );
         holder.seekBar.setMax(book.getAllPages());
@@ -86,7 +90,7 @@ public class LibraryAdapter extends BaseAdapter {
                 ContentValues values = new ContentValues();
                 values.put("freepages", seekBar.getProgress());
                 Log.e("progress",""+seekBar.getProgress());
-                DataSupport.updateAll(DoubanBook.class, values, "bookname = ?", name);
+                DataSupport.updateAll(DoubanBook.class, values, "isbn_number =?", ISBN);
             }
         });
         holder.allpages.setText("全书共"+book.getAllPages()+"页");

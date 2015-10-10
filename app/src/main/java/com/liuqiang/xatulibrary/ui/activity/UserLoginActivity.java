@@ -233,6 +233,7 @@ public class UserLoginActivity extends AppCompatActivity {
             String mypassword = UserData.getPassWord();
             Log.e("Account",myacount+"--"+mypassword);
             try {
+                //AES解密
                 studentID.setText(AESEncryptor.decrypt("qwerty",myacount)); //"qwerty为脏数据
 
                 password.setText(AESEncryptor.decrypt("poiuyt", mypassword).toString());
@@ -257,6 +258,7 @@ public class UserLoginActivity extends AppCompatActivity {
 
             UserData.setRememberPassword(true);
             try {
+                //AES加密
                 UserData.setUserName(AESEncryptor.encrypt("qwerty", studentID.getText().toString()));
                 UserData.setPassWord(AESEncryptor.encrypt("poiuyt", password.getText().toString()));
             }catch (Exception e){
