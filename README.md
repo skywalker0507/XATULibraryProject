@@ -9,3 +9,5 @@
 + 为改善程序运行效率,采用LruCache进行内存缓存,采用DiskLruCache对获取的图片进行
 磁盘缓存
 + 实现扫描图书条码查询功能,采用zxing解码
++ 整个APP的UI基本遵循material design,整体结构为NavigationDrawer+viewpager ,使用
+Android support design库使程序更符合Android设计标准
